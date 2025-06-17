@@ -42,11 +42,11 @@ public class UserService implements UserDetailsService {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("사용자 없음"));
 
-        // 실제 구현: 이전 비밀번호 확인 & 암호화 적용 필요
-        if (!user.getPassword().equals(req.getOldPassword())) {
+        // 비밀번호는 BCrypt 해시로 저장되므로 matches 사용
+        if (!passwordEncoder.matches(req.getOldPassword(), user.getPassword())) {
             throw new RuntimeException("기존 비밀번호 불일치");
         }
-        user.setPassword(req.getNewPassword());
+        user.setPassword(passwordEncoder.encode(req.getNewPassword()));
         userRepository.save(user);
     }
 

@@ -37,10 +37,9 @@ export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const login = async (form: LoginRequest) => {
     const { data } = await api.post<AuthResponse>('/auth/login', form);
     localStorage.setItem('token', data.token);
-    
-    // 바로 user state 업데이트
-    // const profile = await api.get<UserProfile>('/users/me');
-    // setUser(profile.data);
+    // 업데이트된 토큰으로 현재 사용자 정보 조회
+    const profile = await api.get<UserProfile>('/users/me');
+    setUser(profile.data);
   };
   
   // 로그아웃: 토큰 제거 + state 초기화
