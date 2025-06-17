@@ -1,59 +1,66 @@
-<<<<<<< HEAD
-# React + TypeScript + Vite
+# LMS Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 📚 프로젝트 소개
 
-Currently, two official plugins are available:
+이 저장소는 **Learning Management System(LMS, 학습관리시스템)** 구현을 목표로,  
+Spring Boot, JPA, Spring Security, JWT, PostgreSQL 등 다양한 기술 스택을 실습하고  
+백엔드 실무 역량을 키우기 위해 진행하는 **개인 학습 프로젝트**입니다.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🚀 주요 학습/적용 기술
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Spring Boot**
+- **Spring Data JPA**
+- **Spring Security & JWT**
+- **PostgreSQL**
+- **Lombok**
+- **Gradle**
+- **TypeScript**
+- **React**
+  
+---
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## 📝 학습 목표 및 방향
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- **실무형 LMS 백엔드 아키텍처 구현**
+- 인증/인가(JWT)와 보안(Spring Security) 실습
+- JPA를 이용한 도메인 설계 및 DB 연동, 트랜잭션 관리
+- RESTful API 설계 및 테스트
+- 각종 Spring Boot 개발 및 배포 경험 쌓기
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
-=======
-# LMSpro
-LMS 프로젝트 예제 깃허브 입니다
->>>>>>> 0cc783efa1efc1f81b356e9bf70566b3b5a6672c
+## 🛠️ 프로젝트 구조 (예시)
+
+src
+├─ main
+│ ├─ java
+│ │ └─ com.example.lms
+│ │ ├─ controller
+│ │ ├─ model
+│ │ ├─ repository
+│ │ ├─ security
+│ │ ├─ service
+│ └─ resources
+│ ├─ application.yml
+│ └─ ...
+└─ test
+
+
+---
+
+## 💡 앞으로의 계획
+
+- 사용자/강의/과제 등 주요 도메인 기능 확장
+- 테스트 자동화(JUnit) 및 품질 관리
+- CI/CD, 클라우드 배포 등 실무 환경까지 점차 확장 예정
+
+---
+
+## 🙋‍♂️ 학습하며 기록할 점
+
+- 구현/수정/실험하며 배운 점을 정리해 **커밋 메시지, 위키, 이슈 등**에 남길 예정입니다.
+- 피드백이나 조언, 질문도 언제든 환영합니다!
+
+---
