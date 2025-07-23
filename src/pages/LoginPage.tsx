@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
+import type { AxiosError } from 'axios';
 import type { FormEvent } from 'react';
 import type { LoginRequest } from '../types';
 // <로그인 페이지>
@@ -23,7 +24,7 @@ const LoginPage: React.FC = () => {
       window.location.href = '/courses';
     } catch (err) {
       if (err && typeof err === 'object' && 'response' in err) {
-        const response = (err as any).response;
+        const response = (err as AxiosError).response;
         setError('로그인 실패: ' + (response?.data?.message || '아이디/비밀번호를 확인하세요.'));
       } else {
         setError('로그인 실패: 아이디/비밀번호를 확인하세요.');
@@ -59,6 +60,10 @@ const LoginPage: React.FC = () => {
           로그인
         </button>
       </form>
+      <p className="text-sm text-gray-500 mt-3">테스트 계정: admin / 1234</p>
+      <a href="/register" className="text-blue-600 text-sm underline block mt-1">
+        회원가입
+      </a>
     </div>
   );
 };
