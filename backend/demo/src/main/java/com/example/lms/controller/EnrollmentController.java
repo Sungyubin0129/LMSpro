@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:5175")
 public class EnrollmentController {
     private final EnrollmentService enrollmentService;
 

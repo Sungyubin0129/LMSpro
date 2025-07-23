@@ -74,12 +74,44 @@ public class UserService implements UserDetailsService {
         return userRepository.save(user);
     }
 
+    //
+    //    @Override
+    //    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    //        User u = userRepository.findByUsername(username)
+    //                .orElseThrow(() -> new UsernameNotFoundException("사용자 없음: " + username));
+    //
+    //        // Spring Security가 요구하는 UserDetails 구현체로 변환
+    //        return org.springframework.security.core.userdetails.User.builder()
+    //                .username(u.getUsername())
+    //                .password(u.getPassword())
+    //                .roles(u.getRole().name())
+    //                .build();
+    //    }
+
+    // 테스트용
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        // [1] DB에 있는 사용자 먼저 찾기
         User u = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("사용자 없음: " + username));
+                .orElse(null);
 
-        // Spring Security가 요구하는 UserDetails 구현체로 변환
+        // [2] DB에 사용자 없으면, "테스트 계정" 처리
+        if (u == null) {
+            // username이 "test"라면 임시 테스트 계정 허용
+            if ("test".equals(username)) {
+                // password는 bcrypt로 암호화된 "test123"
+                String encodedPassword = passwordEncoder.encode("test123");
+                return org.springframework.security.core.userdetails.User.builder()
+                        .username("test")
+                        .password(encodedPassword)
+                        .roles("USER") // 필요에 따라 ROLE 조정
+                        .build();
+            }
+            // 다른 username이면 기존처럼 예외
+            throw new UsernameNotFoundException("사용자 없음: " + username);
+        }
+
+        // [3] DB에 사용자 있으면 원래대로 리턴
         return org.springframework.security.core.userdetails.User.builder()
                 .username(u.getUsername())
                 .password(u.getPassword())

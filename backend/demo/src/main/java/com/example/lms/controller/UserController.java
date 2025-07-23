@@ -12,6 +12,7 @@ import java.security.Principal;
 @RestController
 @RequestMapping("/api/users")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:5175")
 public class UserController {
     private final UserService userService;
     //api/users/me : 내 정보 조회
@@ -23,7 +24,13 @@ public class UserController {
     /** 내 프로필 정보 조회 */
     @GetMapping("/me")
     public ResponseEntity<UserProfileResponse> getProfile(Principal principal) {
-        UserProfileResponse profile = userService.getProfile(principal.getName());
+        
+        // UserProfileResponse profile = userService.getProfile(principal.getName());
+
+        // 테스트용
+        String testUsername = "test";
+        UserProfileResponse profile = userService.getProfile(testUsername);
+
         return ResponseEntity.ok(profile);
     }
 

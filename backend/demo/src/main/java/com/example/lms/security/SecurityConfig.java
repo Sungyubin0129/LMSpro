@@ -32,12 +32,23 @@ public class SecurityConfig {
         return config.getAuthenticationManager();
     }
 
+//    @Bean
+//    public PasswordEncoder passwordEncoder() {
+//        System.out.println(new BCryptPasswordEncoder().encode("1234"));
+//        //return new BCryptPasswordEncoder();
+//        return NoOpPasswordEncoder.getInstance();
+//        //return new BCryptPasswordEncoder().encode("1234");
+//    }
+
+    // 테스트용
     @Bean
     public PasswordEncoder passwordEncoder() {
-        System.out.println(new BCryptPasswordEncoder().encode("1234"));
-        //return new BCryptPasswordEncoder();
-        return NoOpPasswordEncoder.getInstance();
-        //return new BCryptPasswordEncoder().encode("1234");
+
+        String encoded = new BCryptPasswordEncoder().encode("test123");
+        System.out.println("ㅁㅁㅁㅁㅁㅁㅁㅁㅁ");
+        System.out.println(encoded);
+        System.out.println("ㅁㅁㅁㅁㅁㅁㅁㅁㅁ");
+        return new BCryptPasswordEncoder();
     }
 
     // JWT 필터 등 넣을 SecurityFilterChain
@@ -49,8 +60,9 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**").permitAll()
-                        .anyRequest().authenticated()
+                        .requestMatchers("/api/auth/**").permitAll().anyRequest().permitAll()
+                        // 테스트용 수정
+                        //.anyRequest().authenticated()
                 )
                 .authenticationProvider(daoAuthProvider());
 

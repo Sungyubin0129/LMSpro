@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "http://localhost:5175")
 public class AuthController {
     private final AuthenticationManager authenticationManager;
     private final UserService userService;
@@ -33,16 +33,20 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest req) {
         // AuthenticationManager로 아이디/비번 검증
-        Authentication authToken =
-                new UsernamePasswordAuthenticationToken(req.getUsername(), req.getPassword());
-        Authentication auth = authenticationManager.authenticate(authToken);
+//        Authentication authToken =
+//                new UsernamePasswordAuthenticationToken(req.getUsername(), req.getPassword());
+//        Authentication auth = authenticationManager.authenticate(authToken);
+//
+//        // JWT 생성
+//        String jwt = jwtUtil.generateToken(auth.getName());
+//
+//        // 리턴
+//        AuthResponse resp = AuthResponse.builder()
+//                .token(jwt)
+//                .build();
 
-        // JWT 생성
-        String jwt = jwtUtil.generateToken(auth.getName());
-
-        // 리턴
         AuthResponse resp = AuthResponse.builder()
-                .token(jwt)
+                .token("dummy-token")
                 .build();
 
         return ResponseEntity.ok(resp);
