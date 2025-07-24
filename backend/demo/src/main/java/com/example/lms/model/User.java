@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "users", schema = "lms_db")
 @Getter @Setter @Builder
+@AllArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,9 +33,11 @@ public class User {
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
-    // Entity가 최초 저장될 때 실행되어 createdAt 자동 세팅
     @PrePersist
     public void prePersist(){
         this.createdAt = LocalDateTime.now();
     }
+
+    public User() {}
+
 }

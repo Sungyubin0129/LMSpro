@@ -61,7 +61,6 @@ public class CourseService {
         c.setTitle(req.getTitle());
         c.setDescription(req.getDescription());
         c.setThumbnailUrl(req.getThumbnailUrl());
-        // instructor 변경은 별도 API로 다루는 게 안전합니다.
 
         return toDto(c);
     }

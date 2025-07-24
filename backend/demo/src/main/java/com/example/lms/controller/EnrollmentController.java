@@ -20,6 +20,7 @@ public class EnrollmentController {
     public ResponseEntity<EnrollmentResponse> enroll(
             @PathVariable Long courseId,
             Principal principal) {
+
         EnrollmentResponse resp = enrollmentService.enroll(courseId, principal.getName());
         return ResponseEntity.status(HttpStatus.CREATED).body(resp);
     }

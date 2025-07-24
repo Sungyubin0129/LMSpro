@@ -23,7 +23,7 @@ public class UserController {
 
     /** 내 프로필 정보 조회 */
     @GetMapping("/me")
-    public ResponseEntity<UserProfileResponse> getProfile(Principal principal) {
+    public ResponseEntity<UserProfileResponse> getProfile(Principal principal) throws Exception {
         
         // UserProfileResponse profile = userService.getProfile(principal.getName());
 

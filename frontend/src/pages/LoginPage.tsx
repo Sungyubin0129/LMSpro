@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import type { FormEvent } from 'react';
 import type { LoginRequest } from '../types';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage: React.FC = () => {
   const auth = useContext(AuthContext)!;
@@ -11,6 +12,8 @@ const LoginPage: React.FC = () => {
   });
   const [error, setError] = useState<string | null>(null);
 
+  const navigate = useNavigate();
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
@@ -18,7 +21,8 @@ const LoginPage: React.FC = () => {
     e.preventDefault();
     try {
       await auth.login(form);
-      window.location.href = '/courses';
+      navigate('/myProfile');
+      //window.location.href = '/courses';
     } catch (err) {
       if (err && typeof err === 'object' && 'response' in err) {
         const response = (err as any).response;
